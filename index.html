@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form liên hệ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 py-10">
+
+  <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxwQaUaDJ8Pjcnqr_ZlYTDwihzp6ZlrQOJv-xuMdkvSCNYUTQHbGgjlIZObxErhzK9U/exec" method="POST" class="max-w-md mx-auto bg-white p-6 rounded shadow space-y-4">
+    <div>
+      <label class="block font-semibold">Họ tên <span class="text-red-500">*</span></label>
+      <input type="text" name="name" required class="w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+    <div>
+      <label class="block font-semibold">Điện thoại <span class="text-red-500">*</span></label>
+      <input type="tel" name="phone" required class="w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+    <div>
+      <label class="block font-semibold">Email (không bắt buộc)</label>
+      <input type="email" name="email" class="w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+    <div>
+      <label class="block font-semibold">Nội dung liên hệ <span class="text-red-500">*</span></label>
+      <textarea name="message" rows="4" required class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+    </div>
+    <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">📨 Gửi ngay</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("✅ Gửi thành công!");
+          form.reset();
+        } else {
+          alert("❌ Có lỗi khi gửi, vui lòng thử lại.");
+        }
+      })
+      .catch(error => {
+        console.error("Lỗi:", error);
+        alert("❌ Lỗi kết nối.");
+      });
+    });
+  </script>
+
+</body>
+</html>
